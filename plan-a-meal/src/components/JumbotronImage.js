@@ -2,27 +2,40 @@ import React from 'react'
 import '../styles.css';
 import {Button, InputGroup, Form} from 'react-bootstrap';
 import {useContext, useEffect, useState} from 'react';
+import {MyContext} from '../contexts/context';
+import axios from 'axios';
 
+// setMeals(data.recipes)
 
-const APIKEY = "e16906387a0cc1bcd5c55b39ba76cbe07d4f2f0c";
+const APIKEY = "c488888d957d42e8b5c88e4e7497b2e8";
 
-// `https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}&number=5`
+// https://api.spoonacular.com/recipes/autocomplete?apiKey=${APIKEY}&number=10&query=${searchInput}
+
+// https://api.spoonacular.com/food/search?apiKey=${APIKEY}&query=${searchInput}&number=2
+
+// https://api.spoonacular.com/recipes/?apiKey=c488888d957d42e8b5c88e4e7497b2e8&656846/information
 
 const JumbotronImage = () => {
-  const [meals, setMeals] = useState([]);
+  const {meals, setMeals}  = useContext(MyContext);
+  const [searchInput, setSearchInput] = useState("");
 
-  useEffect(() => {
-    getMeals();
-  },[]);
+// console.log(data.searchResults[0].results)
 
-  const getMeals = async () => {
-    const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}&number=5`);
-    console.log(api);
-    const data = await api.json();
-    console.log(data);
-    setMeals(data);
+  const handleSearch = () => {
+    console.log(searchInput);
+    axios.get(`https://api.spoonacular.com/food/search?apiKey=${APIKEY}&query=${searchInput}&number=2`)
+    .then(({data}) => { setMeals(data.searchResults[0].results)
+    
+  })
+    .catch((error) => console.log(error));
+    setSearchInput("");
   }
-  console.log(meals);
+  const handleKeypress = (e) => {
+    if(e.keyCode === 13){
+      handleSearch();
+      setSearchInput("");
+    }
+  }
 
   return (
     <div className='Jumbo'>
@@ -34,8 +47,11 @@ const JumbotronImage = () => {
         placeholder="Search For A Meal"
         aria-label="Search For A Meal"
         aria-describedby="meal-search-button"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        onKeyDown={handleKeypress}
         />
-        <Button variant="danger" id="meal-search-button">
+        <Button variant="danger" id="meal-search-button" onClick={handleSearch}>
         Button
         </Button>
         </InputGroup>
