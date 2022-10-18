@@ -57,11 +57,14 @@ const Favorites = () => {
     <>
     <div>
       <h3>Your favorites:</h3>
-    <div className='SandwichWrapper'>
-
-    <MealsContainer meals={favorites}/>
-    <FavoritesContainer favorites={favorites} />
-</div>
+      {favorites.map((e) => (    
+      <Card style={{ width: '18rem' }}>
+    <Card.Img variant="top" src={e.image}/>
+    <Card.Body>
+        <Card.Title>{e.title}{e.name}</Card.Title>
+        <MealModal summary={e.summary} content={e.content} title={e.title} name={e.name} id={e.id}/>
+    </Card.Body>
+  </Card>))}
 
 
     </div>
