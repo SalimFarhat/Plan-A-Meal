@@ -5,14 +5,14 @@ import Card from 'react-bootstrap/Card';
 import MealModal from './MealModal';
 
 
-const MealCard = ({id, title, image, summary, name, content}) => {
+const MealCard = ({idMeal, strMealThumb, strInstructions, strMeal, strSource}) => {
 
   return (
     <Card style={{ width: '18rem' }}>
-    <Card.Img variant="top" src={image}/>
+    <Card.Img variant="top" src={strMealThumb}/>
     <Card.Body>
-        <Card.Title>{title}{name}</Card.Title>
-        <MealModal summary={summary} content={content} title={title} name={name} id={id}/>
+        <Card.Title>{strMeal}</Card.Title>
+        <MealModal strInstructions={strInstructions} strMeal={strMeal} idMeal={idMeal} strSource={strSource}/>
     </Card.Body>
   </Card>
   )

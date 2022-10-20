@@ -12,11 +12,17 @@
 
 .Jumbo h1, h2{
     color: white;
-}=
+}
 .searchButton {
-    width: 60%;
+    width: 30%;
     margin-top: 30px;
 }
+
+.searchButton {
+    width: 30%;
+    margin-top: 15px;
+}
+
 
 .SandwichWrapper{
     display: flex;
@@ -27,5 +33,10 @@
 
 .favorites-header {
     color: black;
+}
 
+.login-button{
+    width: 30%;
+    display: flex;
+    margin: auto;
 }

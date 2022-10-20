@@ -5,6 +5,7 @@ import { MyContext } from '../contexts/context';
 import axios from '../Axios';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import '../styles.css';
 
 function Login() {
   const History = useNavigate();
@@ -28,6 +29,7 @@ function Login() {
 
 
   return (
+    <div className='login-button'>
     <Form onSubmit={handleLogin}>
       <Form.Group className="mb-3" controlId="formBasicEmail" >
         <Form.Label>Email address</Form.Label>
@@ -45,6 +47,7 @@ function Login() {
         Login
         </Button>
     </Form>
+    </div>
     )
 }
 

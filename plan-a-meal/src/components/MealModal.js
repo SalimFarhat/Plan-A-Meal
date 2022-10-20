@@ -4,8 +4,7 @@ import AppContext, { MyContext } from '../contexts/context';
 import axios from 'axios';
 
 
-
-const MealModal = ({id, title, image, summary, name, content}) => {
+const MealModal = ({idMeal, strMealThumb, strSource, strMeal, strInstructions}) => {
   const {user, setUser} = useContext(MyContext);
   
   const [show, setShow] = useState(false);
@@ -15,7 +14,7 @@ const MealModal = ({id, title, image, summary, name, content}) => {
   const handleShow = () => setShow(true);
   const handleAddToFavorites = () => {
     setLoading(true);
-    axios.post(`/add-favorites`, {mealId: id})
+    axios.post(`/add-favorites`, {mealId: idMeal})
     .then(({data}) => {
       setLoading(false);
       setUser(data);
@@ -28,7 +27,7 @@ const MealModal = ({id, title, image, summary, name, content}) => {
   }
   const handleRemoveFromFavorites = () =>{
     setLoading(true);
-    axios.post(`/remove-favorites`, {mealId: id})
+    axios.post(`/remove-favorites`, {mealId: idMeal})
     .then(({data}) => {
       setLoading(false);
       setUser(data)
@@ -40,6 +39,7 @@ const MealModal = ({id, title, image, summary, name, content}) => {
   }
 
 
+
     return (
       <>
       <Button variant="primary" onClick={handleShow}>
@@ -47,17 +47,18 @@ const MealModal = ({id, title, image, summary, name, content}) => {
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{title}{name}</Modal.Title>
+          <Modal.Title>{strMeal}</Modal.Title>
         </Modal.Header>
-        <Modal.Body dangerouslySetInnerHTML={{__html: summary}}></Modal.Body>
-        <Modal.Body dangerouslySetInnerHTML={{__html: content}}></Modal.Body>
+        <Modal.Body>{strInstructions}</Modal.Body>
+        {!strSource ? (<Modal.Body>Enjoy!</Modal.Body>) : (<Modal.Body>Original recipe: <a href={`${strSource}`}>{strSource}</a></Modal.Body>)
+        }
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           {user && (
             <>
-            {user.favorite.includes(id.toString()) ? (<Button variant="danger" onClick={handleRemoveFromFavorites} disabled={loading}> Remove from favorites </Button>) : (<Button variant="primary" onClick={handleAddToFavorites} disabled={loading}>Add to favorites</Button>)}
+            {user.favorite.includes(idMeal) ? (<Button variant="danger" onClick={handleRemoveFromFavorites} disabled={loading}> Remove from favorites </Button>) : (<Button variant="primary" onClick={handleAddToFavorites} disabled={loading}>Add to favorites</Button>)}
             </>
 
           )}
@@ -68,3 +69,6 @@ const MealModal = ({id, title, image, summary, name, content}) => {
 }
 
 export default MealModal;
+
+
+{/* <Modal.Body dangerouslySetInnerHTML={{__html: summary}}></Modal.Body> */}
