@@ -1,9 +1,10 @@
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import {Container, Nav, Navbar} from 'react-bootstrap';
 import React, { useContext } from 'react';
 import {LinkContainer} from 'react-router-bootstrap';
 import { MyContext } from '../contexts/context';
 import axios from '../Axios';
 import { useNavigate } from "react-router-dom";
+import '../styles.css';
 
 const AppNavBar = () => {
   const History = useNavigate();
@@ -39,11 +40,9 @@ const AppNavBar = () => {
         )}
         {user && (       
           <> 
-          <LinkContainer to="/favorites">
+          <LinkContainer to="/favorites" className="favButton">
             <Nav.Link>Favorites</Nav.Link>
             </LinkContainer>
-            {"  "}
-
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </>
         )}

@@ -1,22 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { Button } from 'react-bootstrap';
 import { MyContext } from '../contexts/context';
-import {LinkContainer} from 'react-router-bootstrap';
 import '../styles.css';
-import axios from 'axios';
-import Card from 'react-bootstrap/Card';
-import MealModal from './MealModal';
-import MealCard from './MealCard';
 import FavoritesContainer from './FavoritesContainer';
-import MealsContainer from './MealsContainer';
-import { useNavigate } from "react-router-dom";
 
 
 const Favorites = () => {
     const { user } = useContext(MyContext);
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true);
-    const History = useNavigate();
 
 
     
@@ -41,8 +32,9 @@ const Favorites = () => {
       return (
         <>
         <div>
+          <div className='FavoritesHeader'>
           <h3>Your favorites:</h3>
-          <h1>Please work</h1>
+          </div>
           <FavoritesContainer favorites={favorites}/>
 
         </div>
@@ -53,20 +45,3 @@ const Favorites = () => {
 
 
 export default Favorites;
-
-    
-{/* <div className='SandwichWrapper'>
-{favorites.map((e) => (
-<MealCard key={e.id}{...e} 
-))}
-</div> */}
-
-
-// <Card style={{ width: '18rem' }}>
-// <Card.Img variant="top" src={strMealThumb}/>
-// <Card.Body>
-//     <Card.Title>{strMeal}</Card.Title>
-//     <MealModal strInstructions={strInstructions} strMeal={strMeal} idMeal={idMeal} strSource={strSource}/>
-// </Card.Body>
-// </Card>
-

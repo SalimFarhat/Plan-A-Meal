@@ -40,3 +40,15 @@
     display: flex;
     margin: auto;
 }
+
+.FavoritesHeader{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    padding-bottom: 40px;
+}
+
+.favButton{
+    margin-right: 10px;
+}
